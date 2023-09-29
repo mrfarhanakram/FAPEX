@@ -23,7 +23,7 @@ First, download the following files:
 4. Add the Reference/Path in `Application > Shared Components > User Interfaces > JavaScript > File URLs`
    
 ### Modules
-1.&nbsp;[**FAPEX Reports**](#fapex-reports)
+1.&nbsp; [**FAPEX Reports**](#fapex-reports)
 
 
 
