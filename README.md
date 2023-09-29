@@ -45,7 +45,7 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 4. Get data for most recently selected row
 5. Add class to selected row
 
-[**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
+[**Video Tutorial**](https://youtu.be/Gbkph4V7dK4)
 
 #### Assumptions
 1. Works only for Classic and Interactive Reports
