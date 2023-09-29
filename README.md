@@ -83,57 +83,43 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 
 
 ## 📖 Usage
-First of all, [**intstall FAPEX**](/#how-to-intall).
+First of all,&nbsp; [**intstall FAPEX**](#how-to-intall)
+
 ### Page Properties
 Initialize FAPAX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
 
-#### To Create a Home Page
-Create a Page with following `Page Properties` setting
-
-| Property       | Value           |
-|----------------|-----------------|
-| `Page Mode`    | `Normal`        |
-| `CSS Classes`  | `spa-home`      |
-
-
-### SPA Dialogs
-SPA Dialogs are the pages called over the Home page.
-
-#### To Create a SPA Dialog Page
-Create a Page with following `Page Properties` setting
-
-| Property         | Value           |
-|------------------|-----------------|
-| `Page Mode`      | `Modal Dialog`  |
-| `Dialog Template`| `spaDialog`     |
-
-#### SPA Dialog Customization
-You can further modify the layout of SPA Dialogs be adding one or more classes from the following list in `Page Prperties > Dialog > CSS Classes` section. Classes must be seprated by `space`
-
-| Class Name                | Purpose                                                                                                    | 
-|---------------------------|------------------------------------------------------------------------------------------------------------|
-| `spa-noTitle`             | This class will remove the titlebar from SPA Dialogs. You've to add close button to close it.              |
-| `spa-Draggable`           | This class will make the SPA dialog Draggable. By ddfault SPA Dialogs are not draggable.                   |
-| `spa-Resizable`           | This class will make the SPA dialog Resizable. By ddfault SPA Dialogs are not Resizable.                   |
-| `spa-showBreadcrumb`      | SPA Dialog will position after the `Breadcrumbs` area of Home Page.                                        |
-| `spa-showFooter`          | SPA Dialog will end before the Footer, making it visible all the time.                                     |
-
-
-## Other Useful Functions
-
-### setDimentions()
-This Function will reset the size and positions of all the opened SPA Dialogs.
-
+**One FAPEX Report on a Page**
 ```
-setDimentions();
+let options = {
+    multiSelection: true,
+    selectFirstRow: false,
+    selectionClass: 'MyClass'
+};
+fx = new InitializeFapexReport({ staticId: 'projects_report', options: options });
+````
+or you can simply add following to user default options
+```
+fx = new InitializeFapexReport({ staticId: 'projects_report'});
+````
+**Multiple FAPEX Reports on a Page**
+```
+let options = {
+    multiSelection: true,
+    selectFirstRow: false,
+    selectionClass: 'MyClass'
+};
+fx = new InitializeFapexReport([{ staticId: 'projects_report', options: options },
+                                { staticId: 'project_details', options: options },
+                                { staticId: 'project_timelines', options: options }]);
 ```
 
-### spaCloseAllDialog()
-This Function will close all the opened SPA Dialogs.
+#### Selection Change Dynamic Action
+Add Dynamic Action 'Selection Change [Interactive Grid]' to Report region. Recenly selected row data can be retrieved through `this.data` in JS code. For example to print the row data on console you can write following code in JS.
 
 ```
-spaCloseAllDialog();
+console.log(this.data);
 ```
+
 ### Author
 **Farhan Akram**  
 Sr. Oracle Apex Developer  
