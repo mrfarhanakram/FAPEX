@@ -1,5 +1,7 @@
 # FAPAX - An essential kit for Oracle APEX
-FAPAX is and Oracle APEX essential kit, developed Oracle APEX developer to do may things easily.
+FAPAX is a collection of essential tools and resources for Oracle APEX developers. It makes it easier to do complex tasks without having to write or copy code on every page.
+
+Feel free to use FAPAX in your own projects. If you find any bugs or need assistance, please contact me. I am also open to suggestions for new features.
 
 Here is the list of files and their purposes:
 
