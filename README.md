@@ -34,22 +34,58 @@ First, download the following files:
 
 
 ## FAPEX Reports
-To make your Classic Reports and Interactive Reports selectable similar to 
+To make your Classic Reports and Interactive Reports more interactive and useful. You can create master detail pages and do lot of selection based tasks.
 
 #### Features
 1. Single and Muliple row selection
 2. Enables to add Selection change Dynamic Action
+3. Get data for selected/All rows
+4. Get data for most recently selected row
+5. Add class to selected row
+
+#### Functions
+### 1.InitializeFapexReport(list)
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `list`            | Array/Object | Yes | Single/Array of objects `{staticId : <region static id>, options : <object with following properties>}` |
+
+### 2.FapexReport(regionId, options)
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `regionId`        | String | Yes | Static ID of the region. |
+| `options`         | Object | No |  Refer to following table for options object.|
+
+##### Opitons Object
+| Name                      | Default  |  Purpose                                                     | 
+|---------------------------|-----------|----------------------------------------------------------------------|
+| `multiSelection`         | `False` | To get array of Selected Rows Objects. |
+| `selectFirstRow`              | `True`| To get array of All the Rows Objects.   |
+| `selectionClass`     | `undefined` | To get array of Selected Rows Arrays.   |
+
+
+#### Methods
+| Method Name                | Purpose                                                                        | 
+|---------------------------|---------------------------------------------------------------------------------|
+| `getSelectedRows`         | To get array of Selected Rows Objects. |
+| `getAllRows`              | To get array of All the Rows Objects.   |
+| `getSelectedRowsData`     | To get array of Selected Rows Arrays.   |
+| `getAllRowsData`          | To get array of All the Rows Arrays.     |
+| `getColumnList`           | To get array of available columns'  |
+| `selectAll`               | Select all rows     |
+| `clearSelection`          | Clear the selection|
+
+
 
 [**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
 
 #### Assumptions
 1. Works only for Clissic and Interactive Reports
+2. In case of pagination, FAPAX will work only for current Page
 
 ## 📖 Usage
-If you've completed the installation steps, you are ready to use it.
 
-### Home Page
-This is a Index/Home/Calling page that will remain visible all the time. 
+### Page Properties
+Initialize FAPAX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
 
 #### To Create a Home Page
 Create a Page with following `Page Properties` setting
