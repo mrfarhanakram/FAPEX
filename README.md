@@ -43,6 +43,13 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 4. Get data for most recently selected row
 5. Add class to selected row
 
+[**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
+
+#### Assumptions
+1. Works only for Clissic and Interactive Reports
+2. In case of pagination, FAPAX will work only for current Page
+
+
 #### Functions
 ### 1.InitializeFapexReport(list)
 | Argument Name     | Type    | Required   | Description  |            
@@ -56,14 +63,14 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 | `options`         | Object | No |  Refer to following table for options object.|
 
 ##### Opitons Object
-| Name                      | Default  |  Purpose                                                     | 
-|---------------------------|-----------|----------------------------------------------------------------------|
-| `multiSelection`         | `False` | To get array of Selected Rows Objects. |
-| `selectFirstRow`              | `True`| To get array of All the Rows Objects.   |
-| `selectionClass`     | `undefined` | To get array of Selected Rows Arrays.   |
+| Name                      | Default  | Required|  Purpose                                                     | 
+|---------------------------|----------|----------|----------------------------------------------------------------------|
+| `multiSelection`         | `False`| No | If the user is allowed to select multiple rows. |
+| `selectFirstRow`         | `True`| No| If first row is selected by default. (If multiSelection is off)   |
+| `selectionClass`     | `undefined` | No| Name of the class to be added if the row is selected.   |
 
 
-#### Methods
+### Available Methods
 | Method Name                | Purpose                                                                        | 
 |---------------------------|---------------------------------------------------------------------------------|
 | `getSelectedRows`         | To get array of Selected Rows Objects. |
@@ -75,15 +82,8 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 | `clearSelection`          | Clear the selection|
 
 
-
-[**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
-
-#### Assumptions
-1. Works only for Clissic and Interactive Reports
-2. In case of pagination, FAPAX will work only for current Page
-
 ## 📖 Usage
-
+First of all, [**intstall FAPEX**](/#how-to-intall).
 ### Page Properties
 Initialize FAPAX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
 
