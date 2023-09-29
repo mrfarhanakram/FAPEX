@@ -1,28 +1,14 @@
 # FAPAX - An essential kit for Oracle APEX
-FAPAX is and Oracle APEX essential kit
-
-### Modules
-1. FAPEX Reports
-
-   
-## 
-SPA-Apex make enables the Oracle Apex developers to build the applications similar to Single Page Application. This is not trully SPA, but user experience will be similar.
-
-[**View Sample Application**](https://apex.oracle.com/pls/apex/r/skm5156/spa-apex/home)
-
-[**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
+FAPAX is and Oracle APEX essential kit, developed Oracle APEX developer to do may things easily.
 
 Here is the list of files and their purposes:
 
 | Name                     | Description                                                              |
 |--------------------------|--------------------------------------------------------------------------|
-|spa-js.js                 | This file is contains the necessary functions to manage the layout.      |
-|spa-css.css               | This file contains necessary CSS styles.
-|SampleApp.sql             | This is a sample applicaiton file. You can import it to see how it works.|
+|fapax.js                  | This file is contains the JS code for all the FAPAX modules.             |
 
 
 ## Requirements
-
 - Oracle Apex 23.1
 
 ## How to Install
@@ -30,26 +16,32 @@ Here is the list of files and their purposes:
 First, download the following files:
 
 
-### 1. spa-js.js
+### 1. fapax.js
 1. Donwload from gitHub.
-2. Upload in Static Workspace Files `Application > Shared Components > Static Workspace Files` of your Application.
+2. Upload in Static Application Files `Application > Shared Components > Static Application Files` of your Application.
 3. Copy the Reference/Path
 4. Add the Reference/Path in `Application > Shared Components > User Interfaces > JavaScript > File URLs`
+   
+### Modules
+1.&nbsp;[**FAPEX Reports**](#fapex-reports)
 
-### 2. spa-css.css
-1. Donwload from gitHub.
-2. Upload in Static Workspace Files `Application > Shared Components > Static Workspace Files` of your Application.
-3. Copy the Reference/Path
-4. Add the Reference/Path in `Application > Shared Components > User Interfaces > CSS > File URLs`
 
-### 3. Creating Page Template
-1. Go to `Application > Shared Components > Templates`
-2. Copy `Modal Dialog` as `spaDialog`
-3. Scroll to **Dialog Initialization Code** section
-4. Replace `apex.theme42.dialog` with `spaDialog`
-5. Save the Template
 
-All done!
+**Contributors**  
+&nbsp;&nbsp;&nbsp;&nbsp;[Farhan Akram](https://www.linkedin.com/in/mrfarhanakram)
+
+
+## FAPEX Reports
+To make your Classic Reports and Interactive Reports selectable similar to 
+
+#### Features
+1. Single and Muliple row selection
+2. Enables to add Selection change Dynamic Action
+
+[**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
+
+#### Assumptions
+1. Works only for Clissic and Interactive Reports
 
 ## 📖 Usage
 If you've completed the installation steps, you are ready to use it.
