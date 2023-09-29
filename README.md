@@ -11,7 +11,7 @@ Here is the list of files and their purposes:
 
 
 ## Requirements
-- Oracle Apex 23.1
+- Oracle APEX 23.1
 
 ## How to Install
 
