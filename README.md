@@ -1,7 +1,7 @@
-# FAPAX - An essential kit for Oracle APEX
-FAPAX is a collection of essential tools and resources for Oracle APEX developers. It makes it easier to do complex tasks without having to write or copy code on every page.
+# FAPEX - An essential kit for Oracle APEX
+FAPEX is a collection of essential tools and resources for Oracle APEX developers. It makes it easier to do complex tasks without having to write or copy code on every page.
 
-Feel free to use FAPAX in your own projects. If you find any bugs or need assistance, please contact me. I am also open to suggestions for new features.
+Feel free to use FAPEX in your own projects. If you find any bugs or need assistance, please contact me. I am also open to suggestions for new features.
 
 [**Video Introduction**](https://youtu.be/BpyXpcwmJmI)
 
@@ -9,7 +9,7 @@ Here is the list of files and their purposes:
 
 | Name                     | Description                                                              |
 |--------------------------|--------------------------------------------------------------------------|
-|fapax.js                  | This file is contains the JS code for all the FAPAX modules.             |
+|fapex.js                  | This file is contains the JS code for all the FAPEX modules.             |
 
 
 ## Requirements
@@ -20,7 +20,7 @@ Here is the list of files and their purposes:
 First, download the following file(s):
 
 
-### 1. fapax.js
+### 1. fapex.js
 1. Download from gitHub.
 2. Upload in Static Application Files `Application > Shared Components > Static Application Files` of your Application.
 3. Copy the Reference/Path
@@ -49,7 +49,7 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 
 #### Assumptions
 1. Works only for Classic and Interactive Reports
-2. In case of pagination, FAPAX will work only for current Page
+2. In case of pagination, FAPEX will work only for current Page
 
 
 #### Functions
@@ -88,7 +88,7 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 First of all,&nbsp; [**intstall FAPEX**](#how-to-intall)
 
 ### Page Properties
-Initialize FAPAX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
+Initialize FAPEX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
 
 **One FAPEX Report on a Page**
 ```
