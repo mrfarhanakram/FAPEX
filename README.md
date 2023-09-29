@@ -19,7 +19,7 @@ First, download the following files:
 
 
 ### 1. fapax.js
-1. Donwload from gitHub.
+1. Download from gitHub.
 2. Upload in Static Application Files `Application > Shared Components > Static Application Files` of your Application.
 3. Copy the Reference/Path
 4. Add the Reference/Path in `Application > Shared Components > User Interfaces > JavaScript > File URLs`
@@ -37,7 +37,7 @@ First, download the following files:
 To make your Classic Reports and Interactive Reports more interactive and useful. You can create master detail pages and do lot of selection based tasks.
 
 #### Features
-1. Single and Muliple row selection
+1. Single and Multiple row selection
 2. Enables to add Selection change Dynamic Action
 3. Get data for selected/All rows
 4. Get data for most recently selected row
@@ -46,7 +46,7 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 [**Video Tutorial**](https://youtu.be/zzgZ1enBkxI)
 
 #### Assumptions
-1. Works only for Clissic and Interactive Reports
+1. Works only for Classic and Interactive Reports
 2. In case of pagination, FAPAX will work only for current Page
 
 
@@ -114,7 +114,7 @@ fx = new InitializeFapexReport([{ staticId: 'projects_report', options: options 
 ```
 
 #### Selection Change Dynamic Action
-Add Dynamic Action 'Selection Change [Interactive Grid]' to Report region. Recenly selected row data can be retrieved through `this.data` in JS code. For example to print the row data on console you can write following code in JS.
+Add Dynamic Action 'Selection Change [Interactive Grid]' to Report region. Recently selected row data can be retrieved through `this.data` in JS code. For example to print the row data on console you can write following code in JS.
 
 ```
 console.log(this.data);
