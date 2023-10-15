@@ -143,7 +143,7 @@ Add Dynamic Action 'Selection Change [Interactive Grid]' to Report region. Recen
 console.log(this.data);
 ```
 
-## Fapex Navigation
+## FAPEX Navigation
 Passing parameters and navigating to a page throught JavaScript has become very easy.
 
 #### Features
@@ -152,7 +152,7 @@ Passing parameters and navigating to a page throught JavaScript has become very 
 3. Navigate to any page at runtime through JavaScript
 4. Open Page in separte tab.
 
-[**Video Tutorial**](https://youtu.be/Gbkph4V7dK4)
+[**Video Tutorial**](https://youtu.be/0P6JGSL0Ilc)
 
 #### Assumptions
 1. Works only to Navigate/Open apex pages.
@@ -247,7 +247,7 @@ let fxf = new FapexFeatures();
 fxf.copyIGCell();
 ```
 
-[**Video Tutorial**](https://youtu.be/Gbkph4V7dK4)
+[**Video Tutorial**](#)
 
 #### Assumptions
 1. Works only for Interactive Grids
