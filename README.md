@@ -106,7 +106,7 @@ To make your Classic Reports and Interactive Reports more interactive and useful
 
 
 ## 📖 Usage
-First of all,&nbsp; [**intstall FAPEX**](#how-to-intall)
+First of all,&nbsp; [**intstall FAPEX**](#how-to-install)
 
 ### Page Properties
 Initialize FAPEX report module by adding following code in Page `Properties > Function and Global Variable Declaration`
@@ -209,7 +209,7 @@ Output: Returns URL for given page and parameters.
 | `paramObj`        | Object | No | Object containing parameters. `Key: <Parameter Name>, Value: <Parameter Value>` i.e. {P20_EMPLOYEE_ID:'5425', P20_AGE:'25'} |
 
 ## 📖 Usage
-First of all,&nbsp; [**intstall FAPEX**](#how-to-intall)
+First of all,&nbsp; [**intstall FAPEX**](#how-to-install)
 
 ### Navigation/Open Page
 
