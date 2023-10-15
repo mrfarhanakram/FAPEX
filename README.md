@@ -10,6 +10,8 @@ Here is the list of files and their purposes:
 | Name                     | Description                                                              |
 |--------------------------|--------------------------------------------------------------------------|
 |fapex.js                  | This file is contains the JS code for all the FAPEX modules.             |
+|fapex.css                 | This file contains the CSS rules related to FAPEX.                       |
+|pkg_fapex.sql             | This file contains the backend package to be deployed in database.       |
 
 
 ## Requirements
@@ -21,10 +23,29 @@ First, download the following file(s):
 
 
 ### 1. fapex.js
-1. Download from gitHub.
+1. Download this file from gitHub.
 2. Upload in Static Application Files `Application > Shared Components > Static Application Files` of your Application.
 3. Copy the Reference/Path
 4. Add the Reference/Path in `Application > Shared Components > User Interfaces > JavaScript > File URLs`
+
+### 2. fapex.css
+1. Download this file from gitHub.
+2. Upload in Static Application Files `Application > Shared Components > Static Application Files` of your Application.
+3. Copy the Reference/Path
+4. Add the Reference/Path in `Application > Shared Components > User Interfaces > CSS > File URLs`
+
+### 3. pkg_fapex.sql
+1. Download this file from gitHub.
+2. Go to **SQL Scripts** section under **SQL Workshop**
+3. Click upload button and upload the **pkg_fapex.sql**.
+4. Click run button.
+
+### 4. Creating Fapex Application Process
+1. Go to `Application > Shared Components > Application Processes`
+2. Click `Create` and set `Name = FAPAXPROCESS` and `Point = Ajax Callback`
+3. Click **Next**
+4. Enter `PKG_FAPEX.execute_fapex_procedures;` in Code section
+5. Click **Next** and then `Create Process`
    
 ### Modules
 1.&nbsp; [**FAPEX Reports**](#fapex-reports)
