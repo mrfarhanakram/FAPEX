@@ -1,3 +1,8 @@
+//---------------------------------------------------------------------------------------//
+//      Module Name: FapexReport
+//      Purpose:     This module makes Classic Report and Interactive report selectable.   
+//      Date:        14-oct-23
+//---------------------------------------------------------------------------------------//
 function InitializeFapexReport(list) {
     let l = Array.isArray(list) ? list : [list];
     l.forEach((e) => {
@@ -121,4 +126,121 @@ function FapexReport(regionId, options) {
     $(document).ready(function () {
         if (!o.multiSelection && o.selectFirstRow) pSelectFirstRow();
     });
+};
+//---------------------------------------------------------------------------------------//
+//      Module Name: FapexNavigation
+//      Purpose:     To make navigation simpler    
+//      Date:        14-oct-23
+//---------------------------------------------------------------------------------------//
+
+function FapexNavigation() {
+    this.genPageId = function (app_id, page_no) {
+        return '#' + app_id + '@' + page_no;
+    }
+    this.extractAppId = function (PageId) {
+        return PageId.split('@').at(-2).replace('#', '');
+    }
+    this.extractPageId = function (PageId) {
+        return PageId.split('@').at(-1);
+    }
+    this.getParamString = function (paramObj) {
+        let str = '';
+        Object.keys(paramObj).forEach((key, i) => { str += i ? '&' : ''; str += key + "=" + paramObj[key] });
+        return str.replace(/ /g, '%20');
+    }
+    this.getParamNames = function (paramObj) {
+        let str = '';
+        Object.keys(paramObj).forEach((key, i) => { str += i ? ',' : ''; str += key });
+        return str;
+    }
+    this.getParamValues = function (paramObj) {
+        let str = '';
+        Object.keys(paramObj).forEach((key, i) => { str += i ? ',' : ''; str += paramObj[key] });
+        return str;
+    }
+    this.openUrl = function (url) {
+        if (url) javascript: window.open(url, "_blank");
+    }
+    let ajx = async (appID, pageNo, paramNames, paramVals) => apex.server.process('FAPAXPROCESS', {
+        x01: 'generate_url',
+        x02: appID,
+        x03: pageNo,
+        x04: paramNames,
+        x05: paramVals
+    },
+        {
+            dataType: "json",
+            async: true
+        }
+    ).then((pData) => {
+        if (pData.status) {
+            let dataObj = JSON.parse(pData.data);
+            let { url, type, success, error } = dataObj;
+            if (error)
+                console.log(error);
+            else {
+                return url;
+            }
+        } else {
+            console.log('Page link is not generated');
+        }
+    });
+    this.genURL = async function (pageId, paramObj) {
+        let appID = this.extractAppId(pageId), pageNo = this.extractPageId(pageId),
+            paramNames = this.getParamNames(paramObj), paramVals = this.getParamValues(paramObj);
+
+        if (pageNo) {
+            return await ajx(appID, pageNo, paramNames, paramVals);
+        }
+    };
+    this.navToPage = async function (pageId, paramObj) {
+        let url = await this.genURL(pageId, paramObj);
+        apex.navigation.redirect(url);
+    }
+    this.openPage = async function (pageId, paramObj) {
+        let url = await this.genURL(pageId, paramObj);
+        this.openUrl(url);
+    }
+}
+
+//---------------------------------------------------------------------------------------//
+//      Module Name: FapexFeatures
+//      Purpose:     Collection of useful features in fapex.   
+//      Date:        14-oct-23
+//---------------------------------------------------------------------------------------//
+function FapexFeatures() {
+    this.copyIGCell = () => $(document).on('keyup', (e) => {
+        if (e.ctrlKey && e.key == 'c' && $(e.target).is('td')) {
+            {
+                let t = $(e.target).text();
+                if (t) {
+                    navigator.clipboard.writeText(t);
+                    $(e.target).addClass('copy-item-highlight');
+                    setTimeout(() => $(e.target).removeClass('copy-item-highlight'), 200);
+                }
+            }
+        };
+    });
+};
+
+function parseDate(dateString, format) {
+    let dt, dy = ['dd', 'd'], mn = ['mm', 'mon', 'MON'], yr = ['yyyy', 'yy'], sp = ['', '-', '/'];
+    sp.forEach(s => {
+        if (!dt) dy.forEach(d => {
+            if (!dt) mn.forEach(m => {
+                if (!dt) yr.forEach(y => {
+                    if (!dt) try {
+                        dt = apex.date.parse(dateString, d + s + m + s + y);
+                    } catch (e) { }
+                }
+                )
+            })
+        })
+    });
+    return apex.date.format(dt, format);
+}
+let validateDateField = (item) => {
+    if (this.browserEvent) this.browserEvent.stopPropagation();
+    let v = $v(item), fm = $('#' + item).parent().find('[format]').attr('format'), nv = parseDate(v, fm);
+    if (v !== nv) apex.item(item).setValue(nv);
 };

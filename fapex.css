@@ -1,0 +1,9 @@
+/*---------------------------------------------------------------------------------------//
+//      Module Name: FapexFeatures
+//      Purpose:     Collection of useful features in fapex.   
+//      Date:        14-oct-23
+//---------------------------------------------------------------------------------------*/
+.copy-item-highlight {
+    background-color: var(--u-color-1) !important;
+}
+
