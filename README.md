@@ -49,8 +49,8 @@ First, download the following file(s):
    
 ### Modules
 1.&nbsp; [**FAPEX Reports**](#fapex-reports)
-2.&nbsp; [**Fapex Navigation**](#fapexnavigation)
-3.&nbsp; [**Fapex Featuress**](#fapexfeatures)
+2.&nbsp; [**Fapex Navigation**](#fapex-navigation)
+3.&nbsp; [**Fapex Featuress**](#fapex-features)
 
 
 
