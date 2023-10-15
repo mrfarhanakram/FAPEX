@@ -49,6 +49,8 @@ First, download the following file(s):
    
 ### Modules
 1.&nbsp; [**FAPEX Reports**](#fapex-reports)
+2.&nbsp; [**Fapex Navigation**](#fapexnavigation)
+3.&nbsp; [**Fapex Featuress**](#fapexfeatures)
 
 
 
@@ -142,6 +144,116 @@ Add Dynamic Action 'Selection Change [Interactive Grid]' to Report region. Recen
 ```
 console.log(this.data);
 ```
+
+## Fapex Navigation
+Passing parameters and navigating to a page throught JavaScript has become very easy.
+
+#### Features
+1. Generate Parameter list at runtime
+2. Decide calling page at runtime
+3. Navigate to any page at runtime through JavaScript
+4. Open Page in separte tab.
+
+[**Video Tutorial**](https://youtu.be/Gbkph4V7dK4)
+
+#### Assumptions
+1. Works only to Navigate/Open apex pages.
+
+
+#### Functions
+
+### 1.genPageId(app_id,page_no)
+
+Output: `#app_id@page_no`
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `app_id`          | String   | Yes | Application ID of the page |
+| `page_no`          | String   | Yes | Page No of the page |
+
+### 2.extractAppId(PageId)
+Output: Returns Application ID extracted from input.
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `PageId`        | String | Yes | Page ID in the format `#app_id@page_no` |
+
+### 3.extractPageId(PageId)
+Output: Returns Page No extracted from input.
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `PageId`        | String | Yes | Page ID in the format `#app_id@page_no` |
+
+
+### 4.genURL(PageId)
+Output: Returns URL for given page and parameters.
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `PageId`        | String | Yes | Page ID in the format `#app_id@page_no` |
+| `paramObj`        | Object | No | Object containing parameters. `Key: <Parameter Name>, Value: <Parameter Value>` i.e. {P20_EMPLOYEE_ID:'5425', P20_AGE:'25'} |
+
+### 5.navToPage(PageId)
+   Navigate to the given page.
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `PageId`        | String | Yes | Page ID in the format `#app_id@page_no` |
+| `paramObj`        | Object | No | Object containing parameters. `Key: <Parameter Name>, Value: <Parameter Value>` i.e. {P20_EMPLOYEE_ID:'5425', P20_AGE:'25'} |
+
+### 6.openPage(PageId)
+   Open page in separate tab.
+
+| Argument Name     | Type    | Required   | Description  |            
+|-------------------|----------|----------|----------------------|
+| `PageId`        | String | Yes | Page ID in the format `#app_id@page_no` |
+| `paramObj`        | Object | No | Object containing parameters. `Key: <Parameter Name>, Value: <Parameter Value>` i.e. {P20_EMPLOYEE_ID:'5425', P20_AGE:'25'} |
+
+## 📖 Usage
+First of all,&nbsp; [**intstall FAPEX**](#how-to-intall)
+
+### Navigation/Open Page
+
+**Navigate to Page**
+```
+let fxn = new FapexNavigation();
+let paramObj = { P3_EMPLOYEE_NO: '123', P3_AGE: 25 }
+fxn.navToPage('#285692@3', paramObj);
+````
+or you can use following snippet if the page has no parameters.
+```
+let fxn = new FapexNavigation();
+fxn.navToPage('#285692@3', {});
+````
+**Open Page in separate tab**
+```
+let fxn = new FapexNavigation();
+let paramObj = { P3_EMPLOYEE_NO: '123', P3_AGE: 25 }
+fxn.openPage('#285692@3', paramObj);
+````
+or you can use following snippet if the page has no parameters.
+```
+let fxn = new FapexNavigation();
+fxn.openPage('#285692@3', {});
+````
+
+## Fapex Features
+This module contains different options to provide you exiting features without writing extra lines of code.
+
+### 1. Copy Single Cell
+If you try to copy a single Cell in Interactive Grid by pressing **Ctrl+C**, it will copy the whole row. If you want to copy only a focussed cell, add folloing code sippet on page load.
+
+```
+let fxf = new FapexFeatures();
+fxf.copyIGCell();
+```
+
+[**Video Tutorial**](https://youtu.be/Gbkph4V7dK4)
+
+#### Assumptions
+1. Works only for Interactive Grids
+
 
 ### Author
 **Farhan Akram**  
