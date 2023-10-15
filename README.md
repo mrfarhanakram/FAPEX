@@ -13,8 +13,12 @@ Here is the list of files and their purposes:
 |fapex.css                 | This file contains the CSS rules related to FAPEX.                       |
 |pkg_fapex.sql             | This file contains the backend package to be deployed in database.       |
 
+### Modules
+1.&nbsp; [**FAPEX Reports**](#fapex-reports)  
+2.&nbsp; [**Fapex Navigation**](#fapex-navigation)  
+3.&nbsp; [**Fapex Featuress**](#fapex-features)  
 
-## Requirements
+## Compatibility
 - Oracle APEX 23.1
 
 ## How to Install
@@ -46,12 +50,6 @@ First, download the following file(s):
 3. Click **Next**
 4. Enter `PKG_FAPEX.execute_fapex_procedures;` in Code section
 5. Click **Next** and then `Create Process`
-   
-### Modules
-1.&nbsp; [**FAPEX Reports**](#fapex-reports)  
-2.&nbsp; [**Fapex Navigation**](#fapex-navigation)  
-3.&nbsp; [**Fapex Featuress**](#fapex-features)  
-
 
 
 **Contributors**  
