@@ -48,9 +48,9 @@ First, download the following file(s):
 5. Click **Next** and then `Create Process`
    
 ### Modules
-1.&nbsp; [**FAPEX Reports**](#fapex-reports)
-2.&nbsp; [**Fapex Navigation**](#fapex-navigation)
-3.&nbsp; [**Fapex Featuress**](#fapex-features)
+1.&nbsp; [**FAPEX Reports**](#fapex-reports)  
+2.&nbsp; [**Fapex Navigation**](#fapex-navigation)  
+3.&nbsp; [**Fapex Featuress**](#fapex-features)  
 
 
 
