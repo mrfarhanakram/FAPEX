@@ -117,7 +117,7 @@ function FapexReport(regionId, options) {
     //                                                       events
     //.................................................................................................................//
     //$('#' + regionId).on('apexafterrefresh', () => console.log('apexafterrefresh'));
-    $('#' + regionId + ' table').on('click', (e) => {
+    $('#report_table_' + regionId ).on('click', (e) => {
         e.stopPropagation();
         let t = $(e.target).parents('tr');
         pToggleSelection(t);
