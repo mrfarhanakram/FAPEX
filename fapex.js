@@ -60,55 +60,55 @@ function FapexReport(regionId, options) {
             region.prepend($(s));
         }
     },
-        pExtractColumnData = (c) => {
-            let n = $(c).hasClass('u-tR'), text = $(c).text();
-            return n ? Number(text.replace(',', '')) : text;
-        },
-        pExtractRowData = (r) => $(r).find('td').get().map((c) => pExtractColumnData(c));
+    pExtractColumnData = (c) => {
+        let n = $(c).hasClass('u-tR'), text = $(c).text();
+        return n ? Number(text.replace(',', '')) : text;
+    },
+    pExtractRowData = (r) => $(r).find('td').get().map((c) => pExtractColumnData(c)),
     pExtractRowObj = (r) => {
         let columns = pGetColumns(), data = pExtractRowData(r), o = {};
         columns.forEach((c, i) => o[c] = data[i]);
         return o;
     },
-        pGetRows = (selected) => {
-            let allDataRows;
-            allDataRows = table.find('tr' + (selected ? '[is-selected]' : '')).filter(
-                (i, r) => $(r).find('td').length).get().map(
-                    (r) => pExtractRowData(r)
-                );
-            return allDataRows;
-        },
-        pGetRowsObj = (selected) => {
-            let allDataRows = pGetRows(selected), columns = pGetColumns();
-            return allDataRows.map((e) => {
-                let o = {};
-                e.forEach((ee, i) => o[columns[i]] = ee);
-                return o;
-            });
-        },
-        pGetColumns = () => {
-            let r = table.find('tr').filter((i, r) => $(r).find('th').length > 1).last().find('th').get().map((c) => $(c).text());
-            return r;
-        },
-        pSelectFirstRow = () => {
-            let t = table.find('tr').filter((i, r) => $(r).find('td').length).first();
-            pToggleSelection(t);
-        },
-        pToggleSelection = (t) => {
-            let prvSelection = region.find('tr[is-selected]');
-            if (typeof (t.attr('is-selected')) == 'undefined') {
-                if (!o.multiSelection) {
-                    if (o.selectionClass) prvSelection.removeClass(o.selectionClass);
-                    prvSelection.removeAttr('is-selected');
-                };
-                if (o.selectionClass) t.addClass(o.selectionClass);
-                t.attr('is-selected', '');
-            } else {
-                if (o.selectionClass) t.removeClass(o.selectionClass);
-                t.removeAttr('is-selected');
+    pGetRows = (selected) => {
+        let allDataRows;
+        allDataRows = table.find('tr' + (selected ? '[is-selected]' : '')).filter(
+            (i, r) => $(r).find('td').length).get().map(
+                (r) => pExtractRowData(r)
+            );
+        return allDataRows;
+    },
+    pGetRowsObj = (selected) => {
+        let allDataRows = pGetRows(selected), columns = pGetColumns();
+        return allDataRows.map((e) => {
+            let o = {};
+            e.forEach((ee, i) => o[columns[i]] = ee);
+            return o;
+        });
+    },
+    pGetColumns = () => {
+        let r = table.find('tr').filter((i, r) => $(r).find('th').length > 1).last().find('th').get().map((c) => $(c).text());
+        return r;
+    },
+    pSelectFirstRow = () => {
+        let t = table.find('tr').filter((i, r) => $(r).find('td').length).first();
+        pToggleSelection(t);
+    },
+    pToggleSelection = (t) => {
+        let prvSelection = region.find('tr[is-selected]');
+        if (typeof (t.attr('is-selected')) == 'undefined') {
+            if (!o.multiSelection) {
+                if (o.selectionClass) prvSelection.removeClass(o.selectionClass);
+                prvSelection.removeAttr('is-selected');
             };
-            $('#' + this.regionId).trigger('interactivegridselectionchange', t);
+            if (o.selectionClass) t.addClass(o.selectionClass);
+            t.attr('is-selected', '');
+        } else {
+            if (o.selectionClass) t.removeClass(o.selectionClass);
+            t.removeAttr('is-selected');
         };
+        $('#' + this.regionId).trigger('interactivegridselectionchange', t);
+    };
     //.................................................................................................................//
     //                                                      add CSS
     //.................................................................................................................//
@@ -117,11 +117,13 @@ function FapexReport(regionId, options) {
     //                                                       events
     //.................................................................................................................//
     //$('#' + regionId).on('apexafterrefresh', () => console.log('apexafterrefresh'));
-    $('#' + regionId + ' table').on('click', (e) => {
-        e.stopPropagation();
+    $('#' + regionId + ' .t-Report-report, ' + '#' + regionId + ' .a-IRR-table').on('click', (e) => {
         let t = $(e.target).parents('tr');
-        pToggleSelection(t);
-        if (t.find('td').length) t.trigger('interactivegridselectionchange', pExtractRowObj(t));
+        if (t.find('td').length){
+            e.stopPropagation();
+            pToggleSelection(t);
+            t.trigger('interactivegridselectionchange', pExtractRowObj(t));
+        }
     });
     $(document).ready(function () {
         if (!o.multiSelection && o.selectFirstRow) pSelectFirstRow();

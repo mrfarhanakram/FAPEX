@@ -209,7 +209,7 @@ Output: Returns URL for given page and parameters.
 | `paramObj`        | Object | No | Object containing parameters. `Key: <Parameter Name>, Value: <Parameter Value>` i.e. {P20_EMPLOYEE_ID:'5425', P20_AGE:'25'} |
 
 ## 📖 Usage
-First of all,&nbsp; [**intstall FAPEX**](#how-to-install)
+First of all,&nbsp; [**install FAPEX**](#how-to-install)
 
 ### Navigation/Open Page
 
