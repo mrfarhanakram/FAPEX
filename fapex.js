@@ -246,3 +246,179 @@ let validateDateField = (item) => {
     let v = $v(item), fm = $('#' + item).parent().find('[format]').attr('format'), nv = parseDate(v, fm);
     if (v !== nv) apex.item(item).setValue(nv);
 };
+//---------------------------------------------------------------------------------------//
+//      Module Name: FapexBackWorker
+//      Purpose:     Collection of useful features in fapex.   
+//      Date:        14-oct-23
+//---------------------------------------------------------------------------------------//
+function initiateBackWorker(){
+    (function (global) {
+    // shift alt ctrl command
+    let _workerOn = false;
+    const _tasksToDo = [],  _tasksPerformed = [], _handlers = [], _mods = { 16: false, 18: false, 17: false, 91: false },
+        // special keys
+        _MAP = {
+            "command": 91, "backspace": 8, "tab": 9, "enter": 13, "shift": 16, "ctrl": 17, "alt": 18, "escape": 27, "space": 32, "end": 35,
+            "home": 36, "insert": 45, "delete": 46, "0": 48, "1": 49, "2": 50, "3": 51, "4": 52, "5": 53, "6": 54, "7": 55, "8": 56, "9": 57,
+            "a": 65, "b": 66, "c": 67, "d": 68, "e": 69, "f": 70, "g": 71, "h": 72, "i": 73, "j": 74, "k": 75, "l": 76, "m": 77, "n": 78, "o": 79,
+            "p": 80, "q": 81, "r": 82, "s": 83, "t": 84, "u": 85, "v": 86, "w": 87, "x": 88, "y": 89, "z": 90, "0": 96, "1": 97, "2": 98, "3": 99, "4": 100,
+            "5": 101, "6": 102, "7": 103, "8": 104, "9": 105, "*": 106, "+": 107, "-": 109, ".": 110, "/": 111, "f1": 112, "f2": 113, "f3": 114, "f4": 115,
+            "f5": 116, "f6": 117, "f7": 118, "f8": 119, "f9": 120, "f10": 121, "f11": 122, "f12": 123, ";": 186, "=": 187, ",": 188, "-": 189, ".": 190,
+            "/": 191, "`": 192, "[": 219, "\\": 220, "]": 221, "'": 222
+        }, setting = {
+            argSeperator: ' ',
+            execInterval : 1000
+        };
+    function _mapKeys(str) {
+        let p = {
+            altKey: false,
+            ctrlKey: false,
+            metaKey: false,
+            shiftKey: false
+        };
+        let l = str.split(' ').map(k => {
+            switch (k) {
+                case 'shift':
+                    p.shiftKey = true;
+                    return undefined;
+                case 'alt':
+                    p.altKey = true;
+                    return undefined;
+                case 'command':
+                    p.metaKey = true;
+                    return undefined;
+                case 'ctrl':
+                    p.ctrlKey = true;
+                    return undefined;
+                default: return _MAP[k]
+            };
+
+
+        });
+        l.push(p);
+        return l.filter(e => e ? true : false);
+    }
+    function _getHtmlTemplate(handler) {
+        return $(`<div class="t-Form-fieldContainer t-Form-fieldContainer--floatingLabel t-Form-fieldContainer--boldDisplay  has-inlinehelp is-active "
+                id="COMMANDLINE_CONTAINER">
+                <div class="t-Form-labelContainer">
+                    <label for="COMMANDLINE" id="COMMANDLINE_LABEL" class="t-Form-label">${handler.label}</label>
+                </div>
+                <div class="t-Form-inputContainer">
+                    <div class="t-Form-itemWrapper">
+                        <input type="text" id="COMMANDLINE" name="COMMANDLINE" placeholder=">"  class="text_field apex-item-text" value="" size="200">
+                    </div>
+                    <span class="t-Form-inlineHelp">
+                        <span id="COMMANDLINE_inline_help">${handler.hint}</span>
+                    </span>
+                    <span id="COMMANDLINE_error_placeholder" class="a-Form-error"></span>
+                </div>
+            </div>`);
+    }
+    function _getHandler(event) {
+        let r;
+        _handlers.forEach(h => {
+            if (_matchKey(event, h.activationKey)) r = h;
+        });
+        return r;
+    }
+    function _startWorker() {
+        function start() {
+            setTimeout(async function () {
+                let task = _tasksToDo.shift();
+                while (task) {
+                    if (task?.instruction) {
+                        for (const i of task.instruction) {
+                            await _executeInstruction(i, task.handler);
+                        };
+                    }
+                    task = _tasksToDo.shift();
+                }
+                if (_workerOn) start();
+            }, setting.execInterval);
+        };
+        start();
+    }
+    function _matchKey(event, key) {
+        let { keyCode, altKey, shiftKey, ctrlKey, metaKey } = event;
+        return (key[0] === keyCode
+            && key.at(-1).altKey === altKey
+            && key.at(-1).shiftKey === shiftKey
+            && key.at(-1).ctrlKey === ctrlKey
+            && key.at(-1).metaKey === metaKey
+        ) ? true : false;
+    }
+    function openPrompt(h) {
+        let itemCont = _getHtmlTemplate(h);
+        itemCont.appendTo('body');
+        $('#COMMANDLINE').data('handler', h).on('blur', () => {
+            $('#COMMANDLINE_CONTAINER').remove();
+            _workerOn = false;
+        }).keyup(e => {
+            e.preventDefault();
+            e.stopPropagation();
+            let h = $(e.target).data('handler');
+            if (_matchKey(e, h.excutionKey)) {
+                let t = { instruction: [], handler: h };
+                if ($(e.target).val()) t.instruction.push($(e.target).val());
+                $(e.target).val('');
+                _tasksToDo.push(t);
+            } else {
+                let newHandler;
+                _handlers.forEach(hh => {
+                    if (_matchKey(e, hh.activationKey)) {
+                        newHandler = hh;
+                    }
+                    if (newHandler) {
+                        $('#COMMANDLINE_CONTAINER').remove();
+                        openPrompt(newHandler);
+                    }
+                });
+
+            }
+        });
+        //initialize task
+        _workerOn = true;
+        _startWorker();
+        $('#COMMANDLINE').focus();
+    }
+    async function _executeInstruction(i, h) {
+        let result, arg = i.split(setting.argSeperator).filter(e => e).map(a => a == h.blankChar ? '' : a);
+        try {
+            result = await h.execute(arg);
+            _tasksPerformed.push({ instruction: i, success: true, output: result });
+        }
+        catch (e) {
+            _tasksPerformed.push({ instruction: i, success: false, error: e });
+        }
+    }
+    function registerHandler(hadlers) {
+        let handler;
+        (Array.isArray(hadlers) ? hadlers : [hadlers]).forEach(h => {
+            handler = {
+                activationKey: _mapKeys(h.activationKey),
+                label: h.label,
+                hint: h.hint,
+                execute: h.execute,
+                blankChar: h.blankChar,
+                excutionKey: _mapKeys(h.excutionKey)
+            };
+            _handlers.push(handler);
+        });
+    }
+    function _clearTasks(){
+        while(_tasksToDo.shift());
+        while(_tasksPerformed.shift());
+    }
+    //defining global
+    global.tc = {};
+    global.tc.handlers = _handlers;
+    global.tc.clearTasks = _clearTasks;
+    global.tc.tasksPerformed = _tasksPerformed;
+    global.tc.registerHandler = registerHandler;
+    $(global).on('keyup', async (event) => {
+        let h = _getHandler(event);
+        if (h) openPrompt(h);
+    });
+})(this);
+}
