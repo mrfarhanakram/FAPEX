@@ -252,6 +252,7 @@ let validateDateField = (item) => {
 //      Date:        14-oct-23
 //---------------------------------------------------------------------------------------//
 function initiateBackWorker(){
+    console.log(this);
     (function (global) {
     // shift alt ctrl command
     let _workerOn = false;
